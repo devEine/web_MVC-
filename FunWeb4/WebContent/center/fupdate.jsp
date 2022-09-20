@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>center/content.jsp</title>
+<title>center/fupdate.jsp</title>
 <link href="./css/default.css" rel="stylesheet" type="text/css">
 <link href="./css/subpage.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
@@ -47,39 +46,28 @@
 
 <!-- 게시판 -->
 <article>
-<h1>Notice Content</h1>
+<h1>Notice Update</h1>
+<form action="./FileBoardUpdateActionPro.bo" method="post" enctype="multipart/form-data">
+<!-- 이동 가상 주소 -> 파일 수정 가상주소로 변경, enctype 설정 -->
+<input type="hidden" name="bno" value="${dto.bno }">
+<input type="hidden" name="pass" value="1234">
 <table id="notice">
- <tr><td>글쓴이</td><td>${dto.name }</td></tr>
- <tr><td>글쓴날짜</td><td>${dto.date }</td></tr>
- <tr><td>조회수</td><td>${dto.readcount }</td></tr>  
- <tr><td>제목</td><td>${dto.subject }</td></tr>
- <!-- 파일 첨부  -->  
+ <tr><td>글쓴이</td>
+     <td><input type="text" name="name" readonly value="${dto.name }"></td></tr>  
+ <tr><td>제목</td>
+     <td><input type="text" name="subject" value="${dto.subject }"></td></tr>  
+     <!-- 파일 수정위해 지정  -->
  <tr><td>파일</td>
-     <td><a href="./upload/${dto.file }" download>${dto.file }</a>
-     <!-- 파일명에 하이퍼링크 걸어서 누르면 표시되도록 설정 -->
-         <img src="./upload/${dto.file }">
-         <!-- 화면에 이미지 표시되도록 설정  -->
-     </td></tr>  
- <!-- 파일 첨부  -->  
- <tr><td>내용</td><td>${dto.content }</td></tr>
+     <td><input type="file" name="file">${dto.file }  
+     <!-- 파일 수정위해 지정  -->
+     	<input type="hidden" name="oldfile" value="${dto.file }"></td></tr>
+ <tr><td>내용</td>
+     <td><textarea name="content" rows="10" cols="20">${dto.content }</textarea></td></tr>
 </table>
-
 <div id="table_search">
-
-<c:if test="${sessionScope.loginID eq  dto.name}">
-<input type="button" value="글수정" class="btn" 
-   onclick="location.href='./BoardUpdate.bo?bno=${dto.bno }'">
-   
-<input type="button" value="글수정(파일)" class="btn" 
-   onclick="location.href='./FileBoardUpdate.bo?bno=${dto.bno }'"> 
-   
-<input type="button" value="글삭제" class="btn" 
-   onclick="location.href='./BoardDelete.bo?bno=${dto.bno }'">
-</c:if>
-
-<input type="button" value="글목록" class="btn" onclick="location.href='./BoardList.bo'">
+<input type="submit" value="글수정" class="btn">
 </div>
-
+</form>
 <div class="clear"></div>
 <div id="page_control">
 </div>

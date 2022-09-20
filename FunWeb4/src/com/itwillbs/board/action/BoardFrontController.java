@@ -150,6 +150,28 @@ System.out.println(" GET,POST방식 모두 호출 - doProcess() 실행 ");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/FileBoardUpdate.bo")){
+			System.out.println(" C : /BoardBoardUpdate.bo 호출 ");
+			System.out.println(" C : DB작업 o, 페이지 이동");
+			
+			// BoardListSearchAction() 객체 생성
+			action = new FileBoardUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/FileBoardUpdateActionPro.bo")){
+			System.out.println(" C : /FileBoardUpdateActionPro.bo 호출 ");
+			System.out.println(" C : DB작업 o, 페이지 이동");
+			
+			// BoardListSearchAction() 객체 생성
+			action = new FileBoardUpdateActionPro();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		
